@@ -6,6 +6,9 @@ require Pod::Executable.execute_command('node', ['-p',
   )', __dir__]).strip
 
 platform :ios, min_ios_version_supported
+use_modular_headers!
+
+use_frameworks! :linkage => :static
 prepare_react_native_project!
 
 linkage = ENV['USE_FRAMEWORKS']
@@ -22,6 +25,7 @@ target 'whatsapp_clone' do
     # An absolute path to your application root.
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
+pod 'GoogleUtilities', :modular_headers => true
 
   post_install do |installer|
     react_native_post_install(
